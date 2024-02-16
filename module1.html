@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Generative Art Installation</title>
     <link rel="stylesheet" href="module1.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
 <body>
     <h1>Generative Art Installation</h1>
@@ -69,13 +70,41 @@
         </ul>
         <li>Place the ESP32 and battery into the envelope such that the screen is aligned with the hole. Close and secure the envelope.</li>
     </ul>
-    <div>
-        <img src="images/module1/popsicle.JPG">
-        <img src="images/module1/wires.JPG">
-        <img src="images/module1/battery_wires.JPG">
-        <img src="images/module1/battery_esp32.JPG">
-        <img src="images/module1/in_envelope.JPG">
-        <img src="images/module1/esp32_envelope.JPG">
+    <div class="images">
+        <div class="swiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+              <!-- Slides -->
+              <div class="swiper-slide">
+                <img src="images/module1/popsicle.JPG">
+              </div>
+              <div class="swiper-slide">
+                <img src="images/module1/wires.JPG">
+              </div>
+              <div class="swiper-slide">
+                <img src="images/module1/battery_wires.JPG">
+              </div>
+              <div class="swiper-slide">
+                <img src="images/module1/battery_esp32.JPG">
+              </div>
+              <div class="swiper-slide">
+                <img src="images/module1/in_envelope.JPG">
+              </div>
+              <div class="swiper-slide">
+                <img src="images/module1/esp32_envelope.JPG">
+              </div>
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+          
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          
+            <!-- If we need scrollbar -->
+            <div class="swiper-scrollbar"></div>
+        </div>
+    </div>
     </div>
     <p>
         The final display can then be hung wherever you would like for it to be displayed. 
@@ -123,11 +152,34 @@
         aspect of my design. Adding these bookends and making the background color white contributed to making my display look more like a written script. 
         I also made the dialogue formatted at the bottom similarly to how it would be for a script with the character name above and the words below. 
     </p>
-    <div>
-        <img src="images/module1/envelope.JPG">
-        <img src="images/module1/intCourtroom.JPG">
-        <img src="images/module1/lawyer1.JPG">
-        <img src="images/module1/lawyer2.JPG">
+    <div class="images">
+        <div class="swiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+              <!-- Slides -->
+              <div class="swiper-slide">
+                <img src="images/module1/envelope.JPG">
+              </div>
+              <div class="swiper-slide">
+                <img src="images/module1/intCourtroom.JPG">
+              </div>
+              <div class="swiper-slide">
+                <img src="images/module1/lawyer1.JPG">
+              </div>
+              <div class="swiper-slide">
+                <img src="images/module1/lawyer2.JPG">
+              </div>
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+          
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          
+            <!-- If we need scrollbar -->
+            <div class="swiper-scrollbar"></div>
+        </div>
     </div>
     
     <p>
@@ -145,6 +197,7 @@
     <p>
         Major thanks to Professor Mark Santolucito and the COMS3930 Art Group! Every art piece was great and truly showed the range of what generative art can be!
     </p>
-
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="module1.js"></script>
 </body>
 </html>

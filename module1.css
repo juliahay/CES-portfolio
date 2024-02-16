@@ -2,9 +2,37 @@ body {
     margin-left: 10%;
     margin-right: 10%;
     margin-bottom: 50px;
-    background-color: rgb(255, 246, 237);
+    color: rgb(221, 221, 221);
+    background-color: rgb(36, 36, 36);
 }
 
 img {
     width: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.images {
+   align-items: center;
+   display: flex;
+   justify-content: center;
+}
+
+a:link {
+    color:rgb(157, 211, 247)
+}
+
+a:visited {
+    color: rgb(220, 121, 243);
+}
+
+.swiper {
+    width: 40%;
+    height: fit-content;
+}
+
+.swiper-slide img{
+    width: 100%;
 }
