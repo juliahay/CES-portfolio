@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generative Art Installation</title>
+    <link rel="stylesheet" href="module1.css">
+</head>
+<body>
+    <h1>Generative Art Installation</h1>
+    <h2>Module #1: Randomized Courtroom Drama</h2>
+    <!-- IMAGE -->
+    <h3>Art Background</h3>
+    <p>
+        For my art installation, I decided to make a randomly generated script made out of stereotypical lawyer phrases. 
+        The concept behind this project came from my desire to incorporate film scripts into my display. 
+        I kept trying to think of pre-existing scripts to use, but I couldn’t settle on any specific one. 
+        Ultimately, I decided to craft my own. The idea changed a lot over the time I was working on it. 
+        Originally it was a predetermined script that included a third “Judge” character, but that changed to being part pre-determined and part randomized before I finally landed on it being fully randomized. 
+        I landed on an entirely randomized script because I felt it was more interesting if each script was truly brand new. 
+        It felt like each iteration of the display was the creation of a new climax of a courtroom drama that one could see in an actual story. 
+        I also felt the design was just very fun because at times it is very nonsensical, but these phrases are so well known that you still understand what the project is referencing. 
+    </p>
+    <h3>Technical Details</h3>
+    <p>
+        For this art installation, I used an ESP32 TTGO T-Display. To set up the ESP32 and the final display I used the following materials:
+    </p>
+    <ul>
+        <li>ESP32 TTGO T-Display</li>
+        <li>220 mAh battery</li>
+        <li>USB-C Cord</li>
+        <li>An Envelope</li>
+        <li>String</li>
+        <li>A Popsicle Stick
+        </li>
+    </ul>
+    <p>
+        The ESP32 was configured using the following steps:
+    </p>
+    <ul>
+        <li>Download the <a href="https://www.arduino.cc/en/software">Arduino IDE</a></li>
+        <li>Connect the ESP32 with a USB-C Cable (Make sure the blue light on the board gets turned on. If it doesn't, try turning around how the USB-C Cable is plugged in)</li>
+        <li>Under the “Boards Manager” tab, download the ESP32 board by “expressif Systems” (<a href="https://dl.espressif.com/dl/package_esp32_index.json">https://dl.espressif.com/dl/package_esp32_index.json</a>)</li>
+        <li>With the ESP32 plugged in, select the port connected to the device and assign it to the TTGO T1 board.</li>
+        <li>Under “Tools”, set the “Upload Speed” to "115200" to avoid errors with uploading code to the device.</li>
+        <li>Under “Libraries”, download the "TFT_eSPI" library by Bodmer</li>
+        <li>Find the folder on your CPU where Arduino libraries are stored and open the User_Setup_Select.h file in the TFT_eSPI library folder “Arduino/libraries/TFT_eSPI/User_Setup_Select.h”</li>
+        <ul>
+            <li>Comment out the line “#include &lt;User_Setup.h>”</li>
+            <li>Uncomment the line “#include &lt;User_Setups/Setup25_TTGO_T_Display.h>”</li>
+        </ul>
+        <li>At this point, you should be able to upload the code onto your TTGO T-Display by simply pressing the “Upload” button. The code should compile and run.</li>
+    </ul>
+    <p>
+        The Final Display was made using the following steps:
+    </p>
+    <ul>
+        <li>Make a hole in the popsicle stick and thread the string through the hole. Tie the string to make sure it is secure.</li>  
+        <li>Draw any designs onto the envelope</li>
+        <ul>
+            <li>Make sure the envelope has an opening big enough for the TTGO T-Display</li>
+        </ul>
+        <li>Make a small hole in the envelope and thread the other end of the string that is attached to the popsicle stick through it. Secure the string to the envelope.</li>
+        <li>Attach the pre-crimped and soldered battery to the ESP32 by:</li>
+        <ul>
+            <li>Have both the battery and wires that go to a connector that will attach to the ESP32</li>
+            <li>Using a heat gun, heat shrink a protective covering onto the ends of the wires attached to the connector such that the red and black wires do not touch when next to each other and attached to the battery</li>
+            <li>Attach the wires to the battery</li>
+            <li>Connect the wires and battery to the ESP32 using the connector piece</li>
+        </ul>
+        <li>Place the ESP32 and battery into the envelope such that the screen is aligned with the hole. Close and secure the envelope.</li>
+    </ul>
+    <div>
+        <img src="images/module1/popsicle.JPG">
+        <img src="images/module1/wires.JPG">
+        <img src="images/module1/battery_wires.JPG">
+        <img src="images/module1/battery_esp32.JPG">
+        <img src="images/module1/in_envelope.JPG">
+        <img src="images/module1/esp32_envelope.JPG">
+    </div>
+    <p>
+        The final display can then be hung wherever you would like for it to be displayed. 
+        In our installation, we hung the ESP32s by placing the popsicle stick between two vents in the ceiling. 
+        Display for however long you would like or until the battery runs out. 
+    </p>
+    <img src="images/module1/hanging.JPG">
+
+    <h3>Code Details</h3>
+    <p>
+        My decision to settle on a courtroom setting came from some of my early experimentation with the ESP32 where I tried to get the iconic 
+        “Objection!” gif from Ace Attorney to play on my device.
+    </p>
+    <img src="images/module1/objection.gif">
+    <p>
+        The different methods I tried either didn’t work or did not create a gif that 
+        blended well with the background color that I wanted to use. I finally decided to focus specifically on images instead of gifs because 
+        I knew of a process for images that worked well and having images over gifs didn’t hinder my project. The method I used for adding images 
+        followed these steps:
+    </p>
+    <ul>
+        <li>Resize the image to fit onto a ESP32 TTGO T-Display (135 x 240) using this website: <a href="https://www.adobe.com/express/feature/image/resize ">https://www.adobe.com/express/feature/image/resize </a></li>
+        <li>Convert the .jpg file to a .c file using this website: <a href="http://www.rinkydinkelectronics.com/t_imageconverter565.php">http://www.rinkydinkelectronics.com/t_imageconverter565.php </a></li>
+        <li>Rename the .c file to be a .h file and import it into the .ino file.</li>
+        <li>Use the tft.pushImage() function to add it to the display.</li>
+    </ul>
+    <p>
+        I then used another header file to store an array of all the possible dialogue choices each lawyer had. These phrases included “Objection!”,
+         “My client is innocent!”, “My opponent has no evidence!”, and more. To have these phrases be randomly selected, I used the random() function
+          to choose a random index within the array. This index was then compared to the last index stored to make sure the same phrase would not appear
+           twice for the same lawyer. I also had two image options for both lawyers that were also randomly selected using the same method, but images
+            could be repeated consecutively. Lastly, I also randomized the number of times the pairings would talk to each other. Some iterations last 
+            for five rounds while others only last for one. 
+    </p>
+    <p>
+        To conserve battery, the device would go into deep sleep mode after each iteration. The ESP32 would stay sleep for one minute before powering 
+        back on and running a new script. 
+    </p>
+    <p>
+        Here is the link to the code if you want to try the installation out for yourself: <a href="https://github.com/juliahay/Module1-Art-Installation.git">https://github.com/juliahay/Module1-Art-Installation.git</a>
+    </p>
+    <h3>Artistic Vision</h3>
+    <p>
+        Each iteration always started with “INT. COURTROOM” and ended with “END.” in the same way a script does. I really wanted to emphasize the script 
+        aspect of my design. Adding these bookends and making the background color white contributed to making my display look more like a written script. 
+        I also made the dialogue formatted at the bottom similarly to how it would be for a script with the character name above and the words below. 
+    </p>
+    <div>
+        <img src="images/module1/envelope.JPG">
+        <img src="images/module1/intCourtroom.JPG">
+        <img src="images/module1/lawyer1.JPG">
+        <img src="images/module1/lawyer2.JPG">
+    </div>
+    
+    <p>
+        The original image that inspired this design was the “Objection!” image from the video game Ace Attorney. For this reason, I thought having characters 
+        from that game as the images on the screen would be helpful with easily identifying the courtroom setting and the use of lawyers in my project. I also 
+        drew a rough sketch of the “Objection!” image on my envelope to show this outwardly even if the display was turned off. I added the “INT. COURTROOM” 
+        and “END.” also to my envelope to incorporate both the lawyer aspects and the script aspects that were important to me when conceptualizing this design.
+    </p>
+    
+    <h3>Conclusion</h3>
+    <p>
+        I hope you enjoyed learning more about my art installation! Here is a video of the installation in action.
+    </p>
+    <!-- VIDEO OF THE PROJECT RUNNING -->
+    <p>
+        Major thanks to Professor Mark Santolucito and the COMS3930 Art Group! Every art piece was great and truly showed the range of what generative art can be!
+    </p>
+
+</body>
+</html>
