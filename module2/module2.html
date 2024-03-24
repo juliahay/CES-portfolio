@@ -19,10 +19,10 @@
         then use a dial to adjust the red, green, and blue values of the color on their screen 
         in order to match the numerical color value they’ve been given. I used three buttons 
         and a potentiometer as my sensors. The buttons allow players to reset the game, get a hint, 
-        submit their answer, or change which color they wanted to affect. I only had one potentiometer, 
+        submit their answer, or change which color they want to affect. I only had one potentiometer, 
         or dial, so I used the “mode” button to change which value, red, green, or blue, a player 
-        was affecting at a time. The TTGO T-Display was used to give the goal RGB value and to say 
-        which color the player was currently changing. The color the player makes appears on a website. 
+        was affecting at a time. The TTGO T-Display is used to give the goal RGB value and to say 
+        which color the player is currently affecting. The color the player makes appears on a website. 
         The website’s color changes as the player changes the red, green, and blue values. If a player 
         switches which color they want to affect, the player is shown what value that color is currently 
         set to and the game waits until the user has moved the dial to that value before allowing them to 
@@ -85,7 +85,7 @@
         <li>Connect the potentiometer to pin 12 on the ESP32.</li>
         <ul>
             <li>Connect by attaching the correct wires to ground, power, and the correct pin. Unlike with the button, these wires must correspond to a specific pin on the potentiometer. See the diagram below for reference. 1 is for power, 2 is for value output, 3 is for ground.</li>
-            <li>[IMAGE]</li>
+            <img id="diagram" src="../images/module2/potenDiagram.png">
             <li>For power, make sure the wires are connected to a 3V pin.</li>
         </ul>
         <li>With this set up, the ESP32 should receive all the correct sensor inputs.</li>
@@ -194,7 +194,7 @@
         all set randomly and only get reset if the reset button is pressed. 
     </p>
     <p>
-        I used the ArduinoJson library by Benoit to package the data into a JSON. The JSON carried values 
+        I used the ArduinoJson library by Benoit (as found <a href="https://arduinojson.org/">here</a>) to package the data into a JSON. The JSON carried values 
         for the RGB goal value, the value of the hint or submit button, the value of the mode button, a 
         value to indicate the current color being affected, and the value of the potentiometer. After 
         reading each of these values and sending them off to the webpage, the ESP32 would wait half a 
@@ -215,8 +215,8 @@
         if the value equalled 0 or not. For the “mode” button, the value for if the button was pressed was 
         sent alongside the current color mode. This was because I needed to know when a color changes in 
         order to know when to print a new color’s current value. For using the hint or submit button, text 
-        needed to appear on the player’s screen, so those buttons triggered the creation of new divs that 
-        would display the pertinent information. For actually changing the color, the current values of red, 
+        needed to appear on the player’s screen, so that button triggered the creation of new divs that 
+        would display the pertinent information. For affecting the colors, the current values of red, 
         green, and blue were made global variables so that they would persist. Whenever a color’s value is 
         changed, the code changes the background color of the webpage to reflect the new value along with 
         the values of the other colors which haven’t changed. Lastly, to check the player’s end result, I 
@@ -273,7 +273,7 @@
         I hope you enjoyed learning more about my game, Color Match! Here is a video exploring more of its creation and showing the game in action.
     </p>
     <!-- VIDEO OF THE PROJECT RUNNING -->
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/lSLkQv8IfD4?si=gqAGMcQS61t4-wga" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <center><iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/lSLkQv8IfD4?si=gqAGMcQS61t4-wga" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></center>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="module2.js"></script>
 </body>
