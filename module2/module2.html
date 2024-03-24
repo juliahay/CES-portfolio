@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive Devices Modules</title>
+    <link rel="stylesheet" href="module2.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+</head>
+<body>
+    <h1>Module #2: Interactive Devices</h1>
+    <a href="../index.html">Home</a>
+    <h2>Project Name: Color Match</h2>
+    <!-- IMAGE -->
+    <h3>Project Background</h3>
+    <p>
+        For this module, we had to use sensors to create an interactive device with our ESP32. 
+        For my project I decided to make a game called “Color Match” where the objective is to 
+        visually replicate a given RGB value. The player is given a random RGB value and must 
+        then use a dial to adjust the red, green, and blue values of the color on their screen 
+        in order to match the numerical color value they’ve been given. I used three buttons 
+        and a potentiometer as my sensors. The buttons allow players to reset the game, get a hint, 
+        submit their answer, or change which color they wanted to affect. I only had one potentiometer, 
+        or dial, so I used the “mode” button to change which value, red, green, or blue, a player 
+        was affecting at a time. The TTGO T-Display was used to give the goal RGB value and to say 
+        which color the player was currently changing. The color the player makes appears on a website. 
+        The website’s color changes as the player changes the red, green, and blue values. If a player 
+        switches which color they want to affect, the player is shown what value that color is currently 
+        set to and the game waits until the user has moved the dial to that value before allowing them to 
+        change that color. Once a player is actively affecting a color value, the player can’t see what 
+        values they are currently on unless they use one of their hints. Hints show the current numerical 
+        value of the color the player is changing. A player has four hints before they are automatically 
+        given their result. If a player thinks they have the color, they can hold down the hints button 
+        to submit. This game has three possible results: incorrect, close enough, and correct. Close enough 
+        is awarded if all the RGB values are within 10 of the correct value for each respective color. 
+        Correct only appears if everything is perfect. While difficult at times, the game is fun to play and 
+        you’ll find yourself wanting to play again to try and get it exact! 
+    </p>
+    <h3>Technical Details</h3>
+    <p>
+        For this module, I used an ESP32 TTGO T-Display with various sensors to create the device for the game. To set up the device I used the following materials:
+    </p>
+    <ul>
+        <li>ESP32 TTGO T-Display</li>
+        <li>A Potentiometer</li>
+        <li>x3 Buttons</li>
+        <li>Wires</li>
+        <li>Cardboard</li>
+        <li>USB-C Cord</li>
+    </ul>
+    <p>
+        The ESP32 was configured using the following steps:
+    </p>
+    <ul>
+        <li>Download the <a href="https://www.arduino.cc/en/software">Arduino IDE</a></li>
+        <li>Connect the ESP32 with a USB-C Cable (Make sure the blue light on the board gets turned on. If it doesn't, try turning around how the USB-C Cable is plugged in)</li>
+        <li>Under the “Boards Manager” tab, download the ESP32 board by “expressif Systems” (<a href="https://dl.espressif.com/dl/package_esp32_index.json">https://dl.espressif.com/dl/package_esp32_index.json</a>)</li>
+        <li>With the ESP32 plugged in, select the port connected to the device and assign it to the TTGO T1 board.</li>
+        <li>Under “Tools”, set the “Upload Speed” to "115200" to avoid errors with uploading code to the device.</li>
+        <li>Under “Libraries”, download the "TFT_eSPI" library by Bodmer</li>
+        <li>Find the folder on your CPU where Arduino libraries are stored and open the User_Setup_Select.h file in the TFT_eSPI library folder “Arduino/libraries/TFT_eSPI/User_Setup_Select.h”</li>
+        <ul>
+            <li>Comment out the line “#include &lt;User_Setup.h>”</li>
+            <li>Uncomment the line “#include &lt;User_Setups/Setup25_TTGO_T_Display.h>”</li>
+        </ul>
+        <li>At this point, you should be able to upload the code onto your TTGO T-Display by simply pressing the “Upload” button.</li>
+        <li>The code should compile and run on the ESP32, but you will need to connect the sensors for the game to function.</li>
+    </ul>
+    <p>
+        The device was constructed using the following steps:
+    </p>
+    <ul>
+        <li>Solder headers onto the ESP32</li>  
+        <li>Connect two wires onto each button (one wire for ground, one wire for value output)</li>
+        <ul>
+            <li>Connection can be made with soldering or connecting with female wires.</li>
+        </ul>
+        <li>Connect three wires onto the potentiometer (one wire for ground, one wire for value output, and one for power)</li>
+        <ul>
+            <li>Connection can be made with soldering or connecting with female wires.</li>
+        </ul>
+        <li>Connect the three buttons to pins 2, 15, and 13 on the ESP32.</li>
+        <ul>
+            <li>Connect by attaching one wire to a header for ground and the other wire to one of the pins.</li>
+        </ul>
+        <li>Connect the potentiometer to pin 12 on the ESP32.</li>
+        <ul>
+            <li>Connect by attaching the correct wires to ground, power, and the correct pin. Unlike with the button, these wires must correspond to a specific pin on the potentiometer. See the diagram below for reference. 1 is for power, 2 is for value output, 3 is for ground.</li>
+            <li>[IMAGE]</li>
+            <li>For power, make sure the wires are connected to a 3V pin.</li>
+        </ul>
+        <li>With this set up, the ESP32 should receive all the correct sensor inputs.</li>
+        <ul>
+            <li>If the pin numbers on your device do not align with the one’s I’ve listed, you can change them, but make sure to change the corresponding pin within the xyzPins[] array found at the top of the sketch_feb29a.io file.</li>
+            <ul>
+                <li>For the buttons, they need to be connected to a GPIO pin that can read digital values.</li>
+                <li>For the potentiometer, we need a GPIO pin that also functions as a ADC (analog to digital converter).</li>
+            </ul>
+            <li>With this set up, the device is fully functional, but you might want the enclosure to make the device more presentable.</li>
+        </ul>
+    </ul>
+    <p>
+        The enclosure can be constructed using the following steps (Note these measurements are for the specific pieces of hardware I had. Adjust as you need):
+    </p>
+    <ul>
+        <li>Cut the following pieces of cardboard</li>
+        <ul>
+            <li>two 2 1/4” x 5” pieces</li>
+            <li>two 1 1/2” x 5” pieces</li>
+            <li>two 2 1/16” x 1 1/2”  pieces</li>
+        </ul>
+        <li>Cut a hole for the potentiometer, button, and TTGO T-Display in one of the 2 ¼”  x 5” pieces.</li>
+        <ul>
+            <li>Make three 1/2 mm x 1/2 mm holes for the buttons</li>
+            <li>Use the potentiometer as a guide to make a circle that fits it</li>
+            <li>Make one 1 3/16” x 3/4” hole for the screen</li>
+            <li>The location of the holes can be as you see fit</li>
+        </ul>
+        <li>Put the ESP32, buttons, and potentiometer in place according to their holes</li>
+        <ul>
+            <li>You probably want to disconnect all the wires from the ESP32 before doing this and reconnect them later</li>
+            <li>Secure each in place with whatever mode works best. I used electrical tape because I knew I would have to disassemble the device.</li>
+            <li>Add several layers of crisscrossed tape to the backs of the buttons to ensure they have pressure behind them such that they will click and stay in place</li>
+        </ul>
+        <li>Cut a hole in one of the 1 1/2” x 5” pieces of cardboard such that the USB-C connector on the ESP32 can be accessed</li>
+        <ul>
+            <li>Align where the ESP32 is placed on the top cardboard piece of the display with where it will connect with the side piece of the enclosure and cut accordingly to be able to access the connector.</li>
+        </ul>
+        <li>Hot glue all the pieces of cardboard together in a box formation EXCEPT for the piece that has the holes for the TTGO T-Display and sensors</li>
+        <ul>
+            <li>Make sure the hole for the USB-C connector is in the right spot</li>
+        </ul>
+        <li>Connect all the wires to the ESP32 and the sensors.</li>
+        <ul>
+            <li>Make sure all the wires are secure. You might want to use tape to secure connections between wires. This is crucial because movement of wires will cause the device to send bad sensor values.</li>
+        </ul>
+        <li>Add the top of the enclosure</li>
+        <ul>
+            <li>Make sure all the wires fit securely in the box.</li>
+            <li>If you intend to use the ESP32 again, secure the top with something removable like tape.</li>
+        </ul>
+        <li>Add any decorations or text to the enclosure as needed!</li>
+        <ul>
+            <li>Might be helpful to add words describing what each button does.</li>
+        </ul>
+    </ul>
+    <div class="images">
+        <div class="swiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+              <!-- Slides -->
+              <div class="swiper-slide">
+                <img src="../images/module2/IMG_9515.JPG">
+              </div>
+              <div class="swiper-slide">
+                <img src="../images/module2/IMG_9514.JPG">
+              </div>
+              <div class="swiper-slide">
+                <img src="../images/module2/IMG_9513.JPG">
+              </div>
+              <div class="swiper-slide">
+                <img src="../images/module2/IMG_9516.JPG">
+              </div>
+              <div class="swiper-slide">
+                <img src="../images/module2/IMG_9518.JPG">
+              </div>
+              <div class="swiper-slide">
+                <img src="../images/module2/IMG_9517.JPG">
+              </div>
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+          
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          
+            <!-- If we need scrollbar -->
+            <div class="swiper-scrollbar"></div>
+        </div>
+    </div>
+    </div>
+    <h3>Code Details</h3>
+    <p>
+        For this assignment, I had my ESP32 send data to a webpage using a JSON. The webpage then used 
+        JavaScript to parse through that data and reflect any changes on the site. Here is a breakdown 
+        of both of those aspects.
+    </p>
+    <h4>ESP32 Code</h4>
+    <p>
+        On the ESP32 side, the code mainly focuses on reading sensor data, packaging it, and sending it 
+        off as a JSON. I stored all the pins for the different sensors in an array and I set the pin mode 
+        for all sensors as INPUT_PULLUP. For the buttons I used digitalRead() and for the potentiometer 
+        I used analogRead() to read the values coming in from each respective sensor. The RGB values are 
+        all set randomly and only get reset if the reset button is pressed. 
+    </p>
+    <p>
+        I used the ArduinoJson library by Benoit to package the data into a JSON. The JSON carried values 
+        for the RGB goal value, the value of the hint or submit button, the value of the mode button, a 
+        value to indicate the current color being affected, and the value of the potentiometer. After 
+        reading each of these values and sending them off to the webpage, the ESP32 would wait half a 
+        second before reading from the sensors again. 
+    </p>
+    <h4>JavaScript Code</h4>
+    <p>
+        On the JavaScript side, I used the code from the JavaScript page of this <a href="https://www.marksantolucito.com/COMS3930/spring2024/serialAudio.html">WebSerial example</a> 
+        to get the webpage to connect with the ESP32 device. I used JavaScript’s JSON functions to turn the 
+        JSON sent by the ESP32 into something the JavaScript could read. The value sent from the ESP32 was 
+        simply a string that often had a lot of extra values in it that made it hard for the JavaScript JSON 
+        to parse, so I did some string parsing in order to create a format that allowed the JavaScript to 
+        understand it. Sometimes errors still arose when using JSON.parse(), so I added it to a try-catch 
+        block so that my code would still run. 
+    </p>
+    <p>
+        For the buttons, all the default values were 1, so to check if the button had been pushed I checked 
+        if the value equalled 0 or not. For the “mode” button, the value for if the button was pressed was 
+        sent alongside the current color mode. This was because I needed to know when a color changes in 
+        order to know when to print a new color’s current value. For using the hint or submit button, text 
+        needed to appear on the player’s screen, so those buttons triggered the creation of new divs that 
+        would display the pertinent information. For actually changing the color, the current values of red, 
+        green, and blue were made global variables so that they would persist. Whenever a color’s value is 
+        changed, the code changes the background color of the webpage to reflect the new value along with 
+        the values of the other colors which haven’t changed. Lastly, to check the player’s end result, I 
+        would use the goal RGB values sent over to compare to the red, green, and blue values set in the 
+        JavaScript code.
+    </p>
+    <p>
+        Here is the link to the code if you want to give it a look or try the game out for yourself: <a href="https://github.com/juliahay/Module2">https://github.com/juliahay/Module2</a>
+    </p>
+    <h3>Artistic Vision</h3>
+    <p>
+        I chose this game for my project because I wanted to make a simple yet engaging game. Some of the 
+        choices I made in terms of my code or presentation were informed by my goal of using fewer pieces of 
+        hardware. For example, I only had one potentiometer, so I couldn’t have one dial for each color. 
+        This meant that I had to find a way to preserve the value of each color while also being able to 
+        switch between them. This is why I made the decision to have the current value printed whenever 
+        you change the color mode. 
+    </p>
+    <p>
+        My enclosure is pretty simple, but I still wanted it to reflect the feeling of a video game controller 
+        or device. I wanted to keep the device small, so it could easily fit into someone’s hand. I tried to 
+        align the buttons and potentiometer in a way where it would be easy for a player to reach each button 
+        or dial. I also wanted it to be easy for a player to look at both the ESP32 screen and the computer 
+        screen. Lastly, this is a game that requires the computer, so I felt it didn’t need its own battery 
+        since it would be connected up anyway. 
+
+    </p>
+    <div class="images">
+        <div class="swiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+              <!-- Slides -->
+              <div class="swiper-slide">
+                <img src="../images/module2/IMG_9537.JPG">
+              </div>
+              <div class="swiper-slide">
+                <img src="../images/module2/IMG_9546.JPG">
+              </div>
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+          
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          
+            <!-- If we need scrollbar -->
+            <div class="swiper-scrollbar"></div>
+        </div>
+    </div>
+    
+    <h3>Conclusion</h3>
+    <p>
+        I hope you enjoyed learning more about my game, Color Match! Here is a video exploring more of its creation and showing the game in action.
+    </p>
+    <!-- VIDEO OF THE PROJECT RUNNING -->
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/lSLkQv8IfD4?si=gqAGMcQS61t4-wga" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="module2.js"></script>
+</body>
+</html>
